@@ -36,5 +36,10 @@ namespace Simple_Chat
         {
             SharedKey = Exchanger.getSharedKey(partnerKey, PrivateKey, encrypt.AlphabetNew());
         }
+
+        private void sendButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

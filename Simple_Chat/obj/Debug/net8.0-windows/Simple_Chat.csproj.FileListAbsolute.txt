@@ -18,3 +18,4 @@ C:\Users\IRay\source\repos\Simple_Chat\Simple_Chat\obj\Debug\net8.0-windows\refi
 C:\Users\IRay\source\repos\Simple_Chat\Simple_Chat\obj\Debug\net8.0-windows\Simple_Chat.pdb
 C:\Users\IRay\source\repos\Simple_Chat\Simple_Chat\obj\Debug\net8.0-windows\Simple_Chat.genruntimeconfig.cache
 C:\Users\IRay\source\repos\Simple_Chat\Simple_Chat\obj\Debug\net8.0-windows\ref\Simple_Chat.dll
+C:\Users\IRay\source\repos\Simple_Chat\Simple_Chat\obj\Debug\net8.0-windows\Simple_Chat.sourcelink.json
