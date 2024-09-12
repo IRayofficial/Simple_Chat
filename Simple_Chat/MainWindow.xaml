@@ -5,56 +5,83 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Simple_Chat"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="SimpleChat" Height="450" Width="800" MinHeight="450" MinWidth="800">
     <Grid>
 
         <Grid Background="#D9D9D9">
 
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-
             </Grid.RowDefinitions>
+            
 
-            <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0">
-                
+            <!-- Left (User) -->
+            <Border Grid.Column="0"  BorderBrush="Black" BorderThickness="0">
+
+                <Grid Background="#777777">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="55"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="55"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Top Bar for User search-->
+                    <Border Grid.Row="0" BorderBrush="Black" BorderThickness="0,0,0,1">
+                        <Grid Background="#D9D9D9"></Grid>
+                    </Border>
+
+                    <!-- Your contacts -->
+                    <Grid></Grid>
+
+                    <!--Bottom Bar for settings -->
+                    <Border Grid.Row="2" BorderBrush="Black" BorderThickness="0,1,0,0">
+                        <Grid Background="#D9D9D9"></Grid>
+                    </Border>
+                </Grid>
+
             </Border>
 
+            <!-- Right (Chat) -->
             <Grid Grid.Column="1">
 
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="12*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="10"/>
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="10"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="8*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="10"/>
                 </Grid.RowDefinitions>
 
+                <!--Chat -->
                 <Border Grid.Column="1" Grid.Row="1" BorderBrush="Black" BorderThickness="1" CornerRadius="10" Background="#CCCCCC">
                     <TextBox IsReadOnly="True" Background="Transparent" BorderThickness="0" FontSize="20" TextWrapping="Wrap"/>
                 </Border>
 
+                <!-- Inputs -->
                 <Grid Grid.Column="1" Grid.Row="3">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
 
-                    <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1" CornerRadius="10" Background="#CCCCCC">
-                        <TextBox Background="Transparent" BorderThickness="0" FontSize="20" TextWrapping="Wrap"/>
+                    <!-- Textfield -->
+                    <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1" CornerRadius="10" Height="40" Background="#CCCCCC">
+                        <TextBox Background="Transparent" BorderThickness="0" FontSize="20" Padding="5" TextWrapping="Wrap" />
                     </Border>
 
-                    <Button Grid.Column="1" Background="#37AB46" BorderBrush="Black" BorderThickness="1" x:Name="sendButton"  Margin="12 0 0 0" Content="Send" FontSize="20" Click="sendButton_Click">
+                    <!--Submit Button-->
+                    <Button Grid.Column="1" Background="#37AB46" BorderBrush="Black" BorderThickness="1" x:Name="sendButton" Height="40"  Margin="12 0 0 0" Content="Send" FontSize="20" Click="sendButton_Click">
                         <Button.Resources>
                             <Style TargetType="Button">
                                 <Setter Property="Template">
@@ -74,10 +101,8 @@
                         </Button.Resources>
                     </Button>
 
-
                 </Grid>
                 
-
             </Grid>
         </Grid>
 
