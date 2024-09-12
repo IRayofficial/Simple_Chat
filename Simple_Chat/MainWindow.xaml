@@ -7,8 +7,83 @@
         mc:Ignorable="d"
         Title="SimpleChat" Height="450" Width="800" MinHeight="450" MinWidth="800">
     <Grid>
+        <!-- Login -->
+        <Grid Background="#777777" x:Name="LoginView" Visibility="Visible">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="400"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-        <Grid Background="#D9D9D9">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="350"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border BorderBrush="Black" BorderThickness="1" Grid.Column="1" Grid.Row="1">
+                <Grid Background="#D9D9D9">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="23"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="1" Grid.Column="1">
+                        <TextBlock Text="Simple Chat" TextAlignment="Center" FontSize="45"/>
+                        <TextBlock Text="by RayCraft Studios" TextAlignment="Center" FontSize="20" Foreground="#555555"/>
+                        <TextBlock x:Name="ConnectError" TextAlignment="Center" Foreground="Red" Height="30" FontSize="25" /> <!--ErrorMessage-->
+                        <TextBlock Text="Username" TextAlignment="Center" Margin="0 20 0 30"  FontSize="25" />
+                        
+                        <!--Username-->
+                        <Border BorderBrush="Black" BorderThickness="1" CornerRadius="10" Background="#CCCCCC">
+                            <TextBox BorderThickness="0" x:Name="UserName" Background="Transparent" Height="40" FontSize="25" TextAlignment="Center" TextWrapping="Wrap" />
+                        </Border>
+                        <!--Login-->
+                        <Button Background="#37AB46" 
+                                BorderBrush="Black" 
+                                Margin="0 20" 
+                                BorderThickness="1" 
+                                x:Name="Connect" 
+                                Foreground="#FFFFFF" 
+                                Content="Connect with Server" 
+                                Padding="5" 
+                                FontSize="25"
+                                Height="40"
+                                Click="Connect_Click">
+                            <Button.Resources>
+                                <Style TargetType="Button">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="10">
+                                                    <ContentPresenter HorizontalAlignment="Center" 
+                                VerticalAlignment="Center" />
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+
+        </Grid>
+
+        <!-- Chat -->
+        <Grid Background="#D9D9D9" x:Name="ChatView" Visibility="Hidden">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="250"/>
@@ -18,7 +93,6 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            
 
             <!-- Left (User) -->
             <Border Grid.Column="0"  BorderBrush="Black" BorderThickness="0">
@@ -85,7 +159,7 @@
 
                     <!-- Your contacts -->
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Grid.Row="1">
-                        <StackPanel x:Name="UserList" Background="Transparent" VerticalAlignment="Top" Margin="10" />
+                        <StackPanel x:Name="UserListPanel" Background="Transparent" VerticalAlignment="Top" Margin="10" />
                     </ScrollViewer>
 
 
@@ -121,21 +195,25 @@
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="10"/>
+                    <RowDefinition Height="40"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="10"/>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="10"/>
                 </Grid.RowDefinitions>
+                
+                <!--Label for current User-->
+                <TextBlock Background="Transparent" Grid.Column="1" Grid.Row="1" FontSize="25" x:Name="SelectedUserLabel" TextAlignment="Center" Foreground="Black" />
 
                 <!--Chat -->
-                <Border Grid.Column="1" Grid.Row="1" BorderBrush="Black" BorderThickness="1" CornerRadius="10" Background="#CCCCCC">
+                <Border Grid.Column="1" Grid.Row="2" BorderBrush="Black" BorderThickness="1" CornerRadius="10" Background="#CCCCCC">
                     <ScrollViewer x:Name="ChatScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                         <StackPanel x:Name="ChatPanel" Background="Transparent" VerticalAlignment="Top" Margin="10" />
                     </ScrollViewer>
                 </Border>
 
                 <!-- Inputs -->
-                <Grid Grid.Column="1" Grid.Row="3">
+                <Grid Grid.Column="1" Grid.Row="4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="100"/>
