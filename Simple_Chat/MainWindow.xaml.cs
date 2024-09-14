@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Newtonsoft.Json;
 
 namespace Simple_Chat
 {
@@ -34,14 +35,14 @@ namespace Simple_Chat
         private List<User> userList = new List<User>();
         private User selectedUser = null;
 
-        HellmanKeyExchange Exchanger;
+        HellmanKeyExchange Exchanger = new HellmanKeyExchange();
         Encryption encrypt = new Encryption();
+
         NetworkStream stream;
         public MainWindow()
         {
             InitializeComponent();
 
-            Exchanger = new HellmanKeyExchange();
             PrivateKey = Exchanger.initPrivateKey(encrypt.AlphabetNew());
             PublicKey = Exchanger.generatePublicKey(PrivateKey, encrypt.AlphabetNew());            
         }
@@ -53,10 +54,7 @@ namespace Simple_Chat
                 MyUserName = UserName.Text;
                 Task.Run(() => connectToServer());
             }
-            else
-            {
-                ConnectError.Text = "Username cannot be empty";
-            }
+            else { ConnectError.Text = "Username cannot be empty"; }
         }
 
         private async Task connectToServer()
@@ -66,9 +64,15 @@ namespace Simple_Chat
                 /* to test the software just use the chat server from my Github repostiory 
                  * https://github.com/IRayofficial/Chat_Server.git
                  * and run it localy or run it on a Server but if you do change the adress to the internal or external
-                 * server adress
-                 */
-                TcpClient client = new TcpClient("localhost", 8888);
+                 * server adress in the config.json
+                */
+                Config config;
+                using (StreamReader reader = new StreamReader("config.json"))
+                {
+                    string json = reader.ReadToEnd();
+                    config = JsonConvert.DeserializeObject<Config>(json);
+                }
+                TcpClient client = new TcpClient(config.ServerAddress, config.Port);
                 stream = client.GetStream();
 
                 string connectionMessage = "<username>" + MyUserName + "</username><public-key>" + PublicKey + "</public-key>";
@@ -181,49 +185,51 @@ namespace Simple_Chat
             Dispatcher.BeginInvoke(new Action(() =>
             {
                 UserListPanel.Children.Clear();
-
                 foreach (var user in userList)
                 {
                     if (user.PublicKey != PublicKey)
                     {
-                        Border userBox = new Border
-                        {
-                            Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#CCCCCC")),
-                            CornerRadius = new CornerRadius(10),
-                            Padding = new Thickness(10),
-                            Margin = new Thickness(5),
-                            BorderBrush = Brushes.Black,
-                            BorderThickness = new Thickness(1),
-                        };
-
-                        StackPanel infoPanel = new StackPanel();
-
-                        TextBlock usernameBlock = new TextBlock
-                        {
-                            Text = user.UserName,
-                            FontWeight = FontWeights.Bold,
-                            Foreground = Brushes.DarkBlue,
-                            Margin = new Thickness(0, 0, 0, 5)
-                        };
-
-                        TextBlock publicKeyBlock = new TextBlock
-                        {
-                            Text = user.PublicKey,
-                        };
-
-                        infoPanel.Children.Add(usernameBlock);
-                        infoPanel.Children.Add(publicKeyBlock);
-
-                        // Add an event to select this user for private chat
-                        userBox.MouseDown += (s, e) => SelectUserForPrivateChat(user);
-
-                        userBox.Child = infoPanel;
-
-                        UserListPanel.Children.Add(userBox); // Add user to the list in the UI
+                        UserListPanel.Children.Add(UserBox(user));
                     }
                 }
-
             }));
+        }
+
+        private UIElement UserBox(User user)
+        {
+            Border userBox = new Border
+            {
+                Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#CCCCCC")),
+                CornerRadius = new CornerRadius(10),
+                Padding = new Thickness(10),
+                Margin = new Thickness(5),
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness(1),
+            };
+
+            StackPanel infoPanel = new StackPanel();
+
+            TextBlock usernameBlock = new TextBlock
+            {
+                Text = user.UserName,
+                FontWeight = FontWeights.Bold,
+                Foreground = Brushes.DarkBlue,
+                Margin = new Thickness(0, 0, 0, 5)
+            };
+
+            TextBlock publicKeyBlock = new TextBlock
+            {
+                Text = user.PublicKey,
+            };
+
+            infoPanel.Children.Add(usernameBlock);
+            infoPanel.Children.Add(publicKeyBlock);
+
+            // Add an event to select this user for private chat
+            userBox.MouseDown += (s, e) => SelectUserForPrivateChat(user);
+
+            userBox.Child = infoPanel;
+            return userBox;
         }
 
         //Select User click even
@@ -234,7 +240,7 @@ namespace Simple_Chat
             
             calculateSharedKey(user.PublicKey);
 
-            SelectedUserLabel.Text = "Chatting with: " + user.UserName;
+            SelectedUserLabel.Text = MyUserName +" is chatting with: " + user.UserName;
         }
 
         //Ecryption methods

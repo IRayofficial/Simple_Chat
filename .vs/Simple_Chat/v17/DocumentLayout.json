@@ -1,0 +1,75 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Olive\\Desktop\\GH\\Simple_Chat\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0B09B2AC-75D8-4215-8CB6-639BAE7CD8B0}|Simple_Chat\\Simple_Chat.csproj|c:\\users\\olive\\desktop\\gh\\simple_chat\\simple_chat\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B09B2AC-75D8-4215-8CB6-639BAE7CD8B0}|Simple_Chat\\Simple_Chat.csproj|solutionrelative:simple_chat\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B09B2AC-75D8-4215-8CB6-639BAE7CD8B0}|Simple_Chat\\Simple_Chat.csproj|c:\\users\\olive\\desktop\\gh\\simple_chat\\simple_chat\\config.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{0B09B2AC-75D8-4215-8CB6-639BAE7CD8B0}|Simple_Chat\\Simple_Chat.csproj|solutionrelative:simple_chat\\config.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B09B2AC-75D8-4215-8CB6-639BAE7CD8B0}|Simple_Chat\\Simple_Chat.csproj|c:\\users\\olive\\desktop\\gh\\simple_chat\\simple_chat\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B09B2AC-75D8-4215-8CB6-639BAE7CD8B0}|Simple_Chat\\Simple_Chat.csproj|solutionrelative:simple_chat\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "config.json",
+              "DocumentMoniker": "C:\\Users\\Olive\\Desktop\\GH\\Simple_Chat\\Simple_Chat\\config.json",
+              "RelativeDocumentMoniker": "Simple_Chat\\config.json",
+              "ToolTip": "C:\\Users\\Olive\\Desktop\\GH\\Simple_Chat\\Simple_Chat\\config.json",
+              "RelativeToolTip": "Simple_Chat\\config.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-09-14T11:27:18.353Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Config.cs",
+              "DocumentMoniker": "C:\\Users\\Olive\\Desktop\\GH\\Simple_Chat\\Simple_Chat\\Config.cs",
+              "RelativeDocumentMoniker": "Simple_Chat\\Config.cs",
+              "ToolTip": "C:\\Users\\Olive\\Desktop\\GH\\Simple_Chat\\Simple_Chat\\Config.cs",
+              "RelativeToolTip": "Simple_Chat\\Config.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-14T11:25:13.514Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Olive\\Desktop\\GH\\Simple_Chat\\Simple_Chat\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "Simple_Chat\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\Olive\\Desktop\\GH\\Simple_Chat\\Simple_Chat\\MainWindow.xaml.cs",
+              "RelativeToolTip": "Simple_Chat\\MainWindow.xaml.cs",
+              "ViewState": "AQIAAE0AAAAAAAAAAAAgwEIAAAAzAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-14T04:50:12.146Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
