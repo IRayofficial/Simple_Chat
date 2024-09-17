@@ -44,3 +44,8 @@ C:\Users\Olive\Desktop\GH\Simple_Chat\Simple_Chat\bin\Debug\net8.0-windows\Newto
 C:\Users\Olive\Desktop\GH\Simple_Chat\Simple_Chat\obj\Debug\net8.0-windows\Simple_Chat.csproj.AssemblyReference.cache
 C:\Users\Olive\Desktop\GH\Simple_Chat\Simple_Chat\obj\Debug\net8.0-windows\Simple_C.3C78A81D.Up2Date
 C:\Users\Olive\Desktop\GH\Simple_Chat\Simple_Chat\bin\Debug\net8.0-windows\config.json
+C:\Users\IRay\source\repos\Simple_Chat\Simple_Chat\bin\Debug\net8.0-windows\config.json
+C:\Users\IRay\source\repos\Simple_Chat\Simple_Chat\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
+C:\Users\IRay\source\repos\Simple_Chat\Simple_Chat\bin\Debug\net8.0-windows\Simple_Encrypt.dll
+C:\Users\IRay\source\repos\Simple_Chat\Simple_Chat\obj\Debug\net8.0-windows\Simple_Chat.csproj.AssemblyReference.cache
+C:\Users\IRay\source\repos\Simple_Chat\Simple_Chat\obj\Debug\net8.0-windows\Simple_Chat.csproj.CopyComplete

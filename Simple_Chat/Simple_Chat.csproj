@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="SimpleEncrypt" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>

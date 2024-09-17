@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Olive\\Desktop\\GH\\Simple_Chat\\Simple_Chat\\Simple_Chat.csproj": {}
+    "C:\\Users\\IRay\\source\\repos\\Simple_Chat\\Simple_Chat\\Simple_Chat.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Olive\\Desktop\\GH\\Simple_Chat\\Simple_Chat\\Simple_Chat.csproj": {
+    "C:\\Users\\IRay\\source\\repos\\Simple_Chat\\Simple_Chat\\Simple_Chat.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Olive\\Desktop\\GH\\Simple_Chat\\Simple_Chat\\Simple_Chat.csproj",
+        "projectUniqueName": "C:\\Users\\IRay\\source\\repos\\Simple_Chat\\Simple_Chat\\Simple_Chat.csproj",
         "projectName": "Simple_Chat",
-        "projectPath": "C:\\Users\\Olive\\Desktop\\GH\\Simple_Chat\\Simple_Chat\\Simple_Chat.csproj",
-        "packagesPath": "C:\\Users\\Olive\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Olive\\Desktop\\GH\\Simple_Chat\\Simple_Chat\\obj\\",
+        "projectPath": "C:\\Users\\IRay\\source\\repos\\Simple_Chat\\Simple_Chat\\Simple_Chat.csproj",
+        "packagesPath": "C:\\Users\\IRay\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\IRay\\source\\repos\\Simple_Chat\\Simple_Chat\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Olive\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\IRay\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -38,11 +34,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -52,6 +43,10 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
+            },
+            "SimpleEncrypt": {
+              "target": "Package",
+              "version": "[1.0.1, )"
             }
           },
           "imports": [
@@ -73,7 +68,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

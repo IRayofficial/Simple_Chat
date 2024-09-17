@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Newtonsoft.Json;
+using SimpleEncrypt;
 
 namespace Simple_Chat
 {
@@ -21,10 +22,8 @@ namespace Simple_Chat
     public partial class MainWindow : Window
     {
         public string MyUserName;
-        static int[] PrivateKey;
-        public string PublicKey;
-        public string PartnerPublicKey;
-        public string SharedKey;
+        static EncryptManager encryptManager = new EncryptManager(16);
+        public string PublicKey = encryptManager.GetPublicKey();
         public bool connected = false;
 
         public string RecievedContentPattern = @"<type>(.*?)</type>|<content>(.*?)</content>";
@@ -35,16 +34,10 @@ namespace Simple_Chat
         private List<User> userList = new List<User>();
         private User selectedUser = null;
 
-        HellmanKeyExchange Exchanger = new HellmanKeyExchange();
-        Encryption encrypt = new Encryption();
-
         NetworkStream stream;
         public MainWindow()
         {
-            InitializeComponent();
-
-            PrivateKey = Exchanger.initPrivateKey(encrypt.AlphabetNew());
-            PublicKey = Exchanger.generatePublicKey(PrivateKey, encrypt.AlphabetNew());            
+            InitializeComponent();        
         }
 
         //Connections Click
@@ -129,10 +122,9 @@ namespace Simple_Chat
                         {
                             if (match.Groups[1].Success) { user = match.Groups[1].Value; }
                             if (match.Groups[2].Success) { message = match.Groups[2].Value; }
-
                         }
 
-                        message = decryptMessage(message);
+                        message = encryptManager.DecryptMessage(message);
                         Dispatcher.Invoke(() =>
                         {
                             AddMessageToStackPanel(user, message, Brushes.LightGreen, HorizontalAlignment.Left);
@@ -151,13 +143,10 @@ namespace Simple_Chat
 
             foreach (Match match in matches)
             {
-                if (match.Groups[1].Success)
-                {
-                    users.Add(match.Groups[1].Value);
-                }
+                if (match.Groups[1].Success) { users.Add(match.Groups[1].Value); }
             }
 
-            userList.Clear();
+            if (users.Count > 0) { userList.Clear(); }
 
             foreach (var user in users)
             {
@@ -168,21 +157,15 @@ namespace Simple_Chat
                     string publicKey = "";
                     foreach (Match match in userInfo)
                     {
-                        if (match.Groups[1].Success)
-                        {
-                            userName = match.Groups[1].Value;
-                        }
-                        if (match.Groups[2].Success)
-                        {
-                            publicKey = match.Groups[2].Value;
-                        }
+                        if (match.Groups[1].Success) { userName = match.Groups[1].Value; }
+                        if (match.Groups[2].Success) { publicKey = match.Groups[2].Value; }
                     }
                     User newUser = new User(userName, publicKey);
                     userList.Add(newUser);
                 }
             }
 
-            Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.Invoke(() =>
             {
                 UserListPanel.Children.Clear();
                 foreach (var user in userList)
@@ -192,7 +175,7 @@ namespace Simple_Chat
                         UserListPanel.Children.Add(UserBox(user));
                     }
                 }
-            }));
+            });
         }
 
         private UIElement UserBox(User user)
@@ -225,45 +208,17 @@ namespace Simple_Chat
             infoPanel.Children.Add(usernameBlock);
             infoPanel.Children.Add(publicKeyBlock);
 
-            // Add an event to select this user for private chat
             userBox.MouseDown += (s, e) => SelectUserForPrivateChat(user);
-
             userBox.Child = infoPanel;
             return userBox;
         }
 
-        //Select User click even
+        //Select User click
         private void SelectUserForPrivateChat(User user)
         {
-            selectedUser = user; // Store the selected user
-                                 // Optionally update UI to show the selected user
-            
-            calculateSharedKey(user.PublicKey);
-
+            selectedUser = user;
+            encryptManager.InitSharedKey(selectedUser.PublicKey);
             SelectedUserLabel.Text = MyUserName +" is chatting with: " + user.UserName;
-        }
-
-        //Ecryption methods
-        private void calculateSharedKey(string partnerKey)
-        {
-            SharedKey = Exchanger.getSharedKey(partnerKey, PrivateKey, encrypt.AlphabetNew());
-        }
-
-        private string encryptMessage(string message)
-        {
-            if (!string.IsNullOrEmpty(SharedKey))
-            {
-                return new string(encrypt.encodeKey(message, SharedKey));
-            }
-            return message;
-        }
-
-        private string decryptMessage(string message)
-        {
-            if (!string.IsNullOrEmpty(SharedKey)) { 
-                return new string(encrypt.decodeKey(message, SharedKey));
-            }
-            return message;
         }
 
         //Send A Message
@@ -271,27 +226,33 @@ namespace Simple_Chat
         {
             string messageText = MessageInput.Text;
 
-            if (!string.IsNullOrEmpty(messageText) && selectedUser != null)
+            if (!string.IsNullOrEmpty(messageText) && selectedUser != null && userList.Contains(selectedUser))
             {
-                int userId = userList.IndexOf(selectedUser);
-                messageText = encryptMessage(messageText);
-                string sendString = "<from>"+MyUserName+"</from><content>" + messageText + "</content><send-to>" +userId+ "</send-to>"; // TODO MAKE ADDRESSATION TO CORRECT USER
-
-                byte[] buffer = Encoding.UTF8.GetBytes(sendString);
-                try
-                {
-                    stream.Write(buffer, 0, buffer.Length);
-                    messageText = decryptMessage(messageText);
-                    AddMessageToStackPanel(MyUserName, messageText, Brushes.LightBlue, HorizontalAlignment.Right);
-
-                    MessageInput.Text = string.Empty;
-                    ScrollToBottom();
-                }
-                catch (Exception ex) { connected = false; }   
+                sendMessage(messageText);
             }
         }
 
-        //Add to Chat UI
+        private void sendMessage(string messageText)
+        {
+            int userId = userList.IndexOf(selectedUser);
+            encryptManager.InitSharedKey(selectedUser.PublicKey);
+            messageText = encryptManager.EncryptMessage(messageText);
+            string sendString = "<from>" + MyUserName + "</from><content>" + messageText + "</content><send-to>" + userId + "</send-to>";
+
+            byte[] buffer = Encoding.UTF8.GetBytes(sendString);
+            try
+            {
+                stream.Write(buffer, 0, buffer.Length);
+                messageText = encryptManager.DecryptMessage(messageText);
+                AddMessageToStackPanel(MyUserName, messageText, Brushes.LightBlue, HorizontalAlignment.Right);
+
+                MessageInput.Text = string.Empty;
+                ChatScrollViewer.ScrollToEnd();
+            }
+            catch (Exception ex) { connected = false; }
+        }
+
+        //Add message to UI
         private void AddMessageToStackPanel(string username, string message, Brush backgroundColor, HorizontalAlignment alignment)
         {
             Border messageBubble = new Border
@@ -324,16 +285,7 @@ namespace Simple_Chat
             messagePanel.Children.Add(messageBlock);
 
             messageBubble.Child = messagePanel;
-
             ChatPanel.Children.Add(messageBubble);
         }
-
-        //Scroll to end
-        private void ScrollToBottom()
-        {
-            ChatScrollViewer.ScrollToEnd();
-        }
-
-
     }
 }
