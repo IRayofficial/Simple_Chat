@@ -22,12 +22,13 @@ namespace Simple_Chat
     public partial class MainWindow : Window
     {
         public string MyUserName;
+        public int MyId;
         static EncryptManager encryptManager = new EncryptManager(16);
         public string PublicKey = encryptManager.GetPublicKey();
         public bool connected = false;
 
         public string RecievedContentPattern = @"<type>(.*?)</type>|<content>(.*?)</content>";
-        public string GetMessage = @"<username>(.*?)</username>|<message>(.*?)</message>";
+        public string GetMessage = @"<sender-id>(.*?)</sender-id>|<message>(.*?)</message>";
         public string GetUserInfo = @"<username>(.*?)</username>|<public-key>(.*?)</public-key>";
         public string GetClient = @"<client>(.*?)</client>";
 
@@ -116,19 +117,24 @@ namespace Simple_Chat
                     else if (type == "MESSAGE")
                     {
                         string message = "";
-                        string user = "";
+                        string sender = "";
                         var getMessage = Regex.Matches(content, GetMessage);
                         foreach (Match match in getMessage)
                         {
-                            if (match.Groups[1].Success) { user = match.Groups[1].Value; }
+                            if (match.Groups[1].Success) { sender = match.Groups[1].Value; }
                             if (match.Groups[2].Success) { message = match.Groups[2].Value; }
                         }
 
-                        message = encryptManager.DecryptMessage(message);
-                        Dispatcher.Invoke(() =>
+                        if (int.TryParse(sender, out int id) )
                         {
-                            AddMessageToStackPanel(user, message, Brushes.LightGreen, HorizontalAlignment.Left);
-                        });
+                            encryptManager.InitSharedKey(userList[id].PublicKey);
+                            message = encryptManager.DecryptMessage(message);
+                            Dispatcher.Invoke(() =>
+                            {
+                                AddMessageToStackPanel(userList[id].UserName, message, Brushes.LightGreen, HorizontalAlignment.Left);
+                            });
+                            if(selectedUser != null) { encryptManager.InitSharedKey(selectedUser.PublicKey); }
+                        }  
                     }
                 }
             }
@@ -173,6 +179,10 @@ namespace Simple_Chat
                     if (user.PublicKey != PublicKey)
                     {
                         UserListPanel.Children.Add(UserBox(user));
+                    }
+                    else
+                    {
+                        MyId = userList.IndexOf(user);
                     }
                 }
             });
@@ -237,7 +247,7 @@ namespace Simple_Chat
             int userId = userList.IndexOf(selectedUser);
             encryptManager.InitSharedKey(selectedUser.PublicKey);
             messageText = encryptManager.EncryptMessage(messageText);
-            string sendString = "<from>" + MyUserName + "</from><content>" + messageText + "</content><send-to>" + userId + "</send-to>";
+            string sendString = "<from>" + MyId + "</from><content>" + messageText + "</content><send-to>" + userId + "</send-to>";
 
             byte[] buffer = Encoding.UTF8.GetBytes(sendString);
             try

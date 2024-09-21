@@ -22,24 +22,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "config.json",
-              "DocumentMoniker": "C:\\Users\\Olive\\Desktop\\GH\\Simple_Chat\\Simple_Chat\\config.json",
-              "RelativeDocumentMoniker": "Simple_Chat\\config.json",
-              "ToolTip": "C:\\Users\\Olive\\Desktop\\GH\\Simple_Chat\\Simple_Chat\\config.json",
-              "RelativeToolTip": "Simple_Chat\\config.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-09-14T11:27:18.353Z",
-              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -51,8 +38,7 @@
               "RelativeToolTip": "Simple_Chat\\Config.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAXAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T11:25:13.514Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-14T11:25:13.514Z"
             },
             {
               "$type": "Document",
@@ -62,10 +48,22 @@
               "RelativeDocumentMoniker": "Simple_Chat\\MainWindow.xaml.cs",
               "ToolTip": "C:\\Users\\Olive\\Desktop\\GH\\Simple_Chat\\Simple_Chat\\MainWindow.xaml.cs",
               "RelativeToolTip": "Simple_Chat\\MainWindow.xaml.cs",
-              "ViewState": "AQIAAE0AAAAAAAAAAAAgwEIAAAAzAAAA",
+              "ViewState": "AQIAAHEAAAAAAAAAAAAUwIQAAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-14T04:50:12.146Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "config.json",
+              "DocumentMoniker": "C:\\Users\\Olive\\Desktop\\GH\\Simple_Chat\\Simple_Chat\\config.json",
+              "RelativeDocumentMoniker": "Simple_Chat\\config.json",
+              "ToolTip": "C:\\Users\\Olive\\Desktop\\GH\\Simple_Chat\\Simple_Chat\\config.json",
+              "RelativeToolTip": "Simple_Chat\\config.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-09-14T11:27:18.353Z"
             }
           ]
         }

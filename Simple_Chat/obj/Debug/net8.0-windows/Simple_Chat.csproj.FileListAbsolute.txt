@@ -49,3 +49,4 @@ C:\Users\IRay\source\repos\Simple_Chat\Simple_Chat\bin\Debug\net8.0-windows\Newt
 C:\Users\IRay\source\repos\Simple_Chat\Simple_Chat\bin\Debug\net8.0-windows\Simple_Encrypt.dll
 C:\Users\IRay\source\repos\Simple_Chat\Simple_Chat\obj\Debug\net8.0-windows\Simple_Chat.csproj.AssemblyReference.cache
 C:\Users\IRay\source\repos\Simple_Chat\Simple_Chat\obj\Debug\net8.0-windows\Simple_Chat.csproj.CopyComplete
+C:\Users\Olive\Desktop\GH\Simple_Chat\Simple_Chat\bin\Debug\net8.0-windows\Simple_Encrypt.dll
